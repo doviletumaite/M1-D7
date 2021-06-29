@@ -39,7 +39,9 @@
 
   <body>
     <h1>Accessing Elements in the DOM</h1>
-
+         <button onclick = "toggleSelectedDiv()">Toggle the demo-id!</button>  
+         <input onclick = "toggleAllHeaders()" type="button" value="Toggle all the headers!"/>
+         <button onclick = "createNewElement()">Create a new element</button> 
     <div>
       <h2 id="demo-id">ID (#demo-id)</h2>
       <div>Access me by ID</div>
@@ -83,6 +85,56 @@
         <li>Third element inside a list</li>
       </ul>
     </div>
+
+    <script lang="text/javascript"> 
+
+    let toggleSelectedDiv =function () {
+
+        // alert ("i'm changing your demo-id element")
+        let divDemo= document.getElementById("demo-id") // no #
+        divDemo.classList.toggle("selected") // will search the element "demo-id" and when it will be find "selected" will be add // this can be turned in a function
+
+    } 
+    // until i don't call the function nothing will happen, i have to call that in the ispector 
+    // how to modify all the demos
+
+
+    let toggleAllHeaders = function () {
+
+       let allOurHeaders = document.querySelectorAll("h2")
+
+       for (let header of allOurHeaders) {
+        header.classList.toggle ("selected")
+    }
+}
+ 
+let createNewElement = function() {
+    // ---- Let's create a new article element
+    let newElement = document.createElement("article") 
+            // Creates this HTML code: <article></article>
+            newElement.innerText = "Hi, I'm the new guy here"
+            // <article>Hi, I'm the new guy here</article>
+            newElement.style.color = "green"
+            // <article style="color:green;">Hi, I'm the new guy here</article>
+            newElement.id = "new-id"
+            // <article id="new-id" style="color:green;">Hi, I'm the new guy here</article>
+            
+            // ---- We also want to put the current time in the element's text
+            let currentTime = new Date()
+            let currentFormattedTime = ` ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`
+            newElement.innerText += currentFormattedTime // <article>Hi, I'm the new guy here (12:56:22)</article>
+
+            // ---- It still lives in memory only, it's not ATTACHED to the DOM yet
+            console.log(newElement)
+
+            // ---- Let's find the parent of our newly created element
+            let container = document.getElementById("article-container")
+
+            // ---- Let's append the newly created element as the last child of the 'container' parent
+            container.appendChild(newElement)
+        }
+
+    </script>
   </body>
 </html> 
 © 2021 GitHub, Inc.
